@@ -25,6 +25,23 @@ public final class ExtendedTATUWrapper {
         return getConnectionTopic().concat(TOPIC_RESPONSE);
     }
     
+    public static String buildConnectMessage(Device device, String ip, Double timeout, JSONObject ariesConnection){
+        JSONObject requestBody = new JSONObject();
+        JSONObject header = new JSONObject();
+
+        requestBody.put("TIME_OUT", timeout);
+        header.put("NAME", device.getId());
+        header.put("SOURCE_IP", ip);
+        header.put("TIMESTAMP", System.currentTimeMillis());
+        requestBody.put("HEADER", header);
+        requestBody.put("DEVICE", DeviceWrapper.toJSONObject(device));
+        requestBody.put("ARIES_CONNECTION", ariesConnection);
+        return new StringBuilder()
+                .append("CONNECT VALUE BROKER ")
+                .append(requestBody.toString())
+                .toString();
+    }
+    
     public static String buildConnectMessage(Device device, String ip, Double timeout){
         JSONObject requestBody = new JSONObject();
         JSONObject header = new JSONObject();
