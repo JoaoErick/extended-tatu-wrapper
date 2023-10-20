@@ -50,7 +50,12 @@ public class SensorWrapper {
         String type = (String) sensor.getOrDefault("type", INVALID_SENSOR);
         int collectionTime = (int) sensor.getOrDefault("collection_time", 0);
         int publishingTime = (int) sensor.getOrDefault("publishing_time", 0);
-        return new Sensor(id, type, collectionTime, publishingTime);
+        
+        int minValue = (int) sensor.getOrDefault("min_value", Sensor.DEFAULT_MIN_VALUE);
+        int maxValue = (int) sensor.getOrDefault("max_value", Sensor.DEFAULT_MAX_VALUE);
+        int delta = (int) sensor.getOrDefault("delta", Sensor.DEFAULT_DELTA);
+        
+        return new Sensor(id, type, collectionTime, publishingTime, minValue, maxValue, delta);
     }
 
     public static Sensor toSensor(String sensor) {
@@ -62,7 +67,12 @@ public class SensorWrapper {
         String type = sensor.getString("type");
         int collectionTime = sensor.getInt("collection_time");
         int publishingTime = sensor.getInt("publishing_time");
-        return new Sensor(id, type, collectionTime, publishingTime);
+        
+        int minValue = sensor.has("min_value") ? sensor.getInt("min_value") : Sensor.DEFAULT_MIN_VALUE;
+        int maxValue = sensor.has("max_value") ? sensor.getInt("max_value") : Sensor.DEFAULT_MAX_VALUE;
+        int delta = sensor.has("delta") ? sensor.getInt("delta") : Sensor.DEFAULT_DELTA;
+        
+        return new Sensor(id, type, collectionTime, publishingTime, minValue, maxValue, delta);
     }
 
     public static String toJSON(Sensor sensor) {
