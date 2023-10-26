@@ -134,7 +134,7 @@ public final class TATUWrapper {
         return request.split(" ")[2];
     }
 
-    public static String getAttributeByTATURequest(String request) {
+    public static String getCommandByTATURequest(String request) {
         return request.split(" ")[1];
     }
 
