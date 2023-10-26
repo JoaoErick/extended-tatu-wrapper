@@ -13,6 +13,7 @@ public class TATUMessage {
 
     private String message;
     private ExtendedTATUMethods method;
+    private String attribute;
     private String targetName;
     private Optional<String> content;
     private boolean response;
@@ -26,12 +27,21 @@ public class TATUMessage {
         this.message = message;
         this.method = ExtendedTATUMethods.valueOf(TATUWrapper.getMethod(message));
         this.response = TATUWrapper.isTATUResponse(message);
+        this.attribute = this.getAttribute(message);
         this.targetName = this.getTarget(message);
         this.content = this.findMessageContent(message);
     }
 
     public ExtendedTATUMethods getMethod() {
         return this.method;
+    }
+
+    public String getAttribute() {
+        return this.attribute;
+    }
+
+    public String getAttribute(String message) {
+        return TATUWrapper.getAttributeByTATURequest(message);
     }
 
     public String getTarget() {
