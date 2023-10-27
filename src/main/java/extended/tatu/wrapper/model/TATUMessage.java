@@ -41,7 +41,9 @@ public class TATUMessage {
     }
 
     public String getCommand(String message) {
-        return TATUWrapper.getCommandByTATURequest(message);
+        return (!this.isResponse())
+                ? TATUWrapper.getCommandByTATURequest(message)
+                : "";
     }
 
     public String getTarget() {
