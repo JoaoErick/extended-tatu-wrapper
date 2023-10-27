@@ -85,7 +85,7 @@ public class TATUMessage {
             json.accumulate("isResponse", this.response);
             json.accumulate("message", this.message);
             json.accumulate("messageContent", this.content.get());
-            json.accumulate("sensor", this.targetName);
+            json.accumulate("target", this.targetName);
             json.accumulate("method", this.method);
             this.formatedMessage = json.toString();
         }
